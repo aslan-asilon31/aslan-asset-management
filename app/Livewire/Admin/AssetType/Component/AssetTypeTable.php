@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Admin\Permission\Component;
+namespace App\Livewire\Admin\Asset\Component;
 
 use App\Helpers\Table\Traits\WithTable;
-use App\Models\Permission;
+use App\Models\AssetType;
 use App\Models\Position;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -20,16 +20,15 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use PowerComponents\LivewirePowerGrid\Components\SetUp\Exportable;
 
-final class PermissionTable extends PowerGridComponent
+final class AssetTypeTable extends PowerGridComponent
 {
-    public string $tableName = 'permissions';
+    public string $tableName = 'asset_types';
     public string $sortField = 'created_at';
-    // public string $sortDirection = 'desc';
-    public string $url = '/permission';
+    public string $sortDirection = 'desc';
+    public string $url = '/asset';
 
     use WithExport;
     use WithTable;
-
 
     public function setUp(): array
     {
@@ -46,19 +45,17 @@ final class PermissionTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Permission::query()
+        return AssetType::query()
             ->select([
-                'id',
-                'name',
-                'guard_name',
+                'assets.id',
+                'assets.name',
+                'assets.description',
             ]);
     }
 
     public function relationSearch(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
     public function fields(): PowerGridFields
@@ -66,11 +63,10 @@ final class PermissionTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('action', fn($record) => Blade::render('
                 <x-dropdown no-x-anchor class="btn-sm">
-                    <x-menu-item title="Show" Link="/daftar-pertanyaan/show/' . e($record->id) . '/readonly" />
-                    <x-menu-item class="" title="Edit" Link="/daftar-pertanyaan/edit/' . e($record->id) . '"/>
+                    <x-menu-item title="Edit" Link="/asset-edit/' . e($record->id) . '"/>
                 </x-dropdown>'))
             ->add('name', fn($record) => $record->name)
-            ->add('guard_name');
+            ->add('description', fn($record) => $record->description);
     }
 
     public function columns(): array
@@ -88,18 +84,15 @@ final class PermissionTable extends PowerGridComponent
                 ->headerAttribute('text-center', 'background-color:#800080; color:white;text-align:center;'),
 
 
-            Column::make('Name', 'name')
+            Column::make('name', 'name')
                 ->sortable()
-                ->searchable()
                 ->headerAttribute('text-center', 'background-color:#800080; color:white;text-align:center;'),
 
 
-
-            Column::make('guard name', 'guard_name')
+            Column::make('description', 'description')
                 ->sortable()
                 ->searchable()
                 ->headerAttribute('text-center', 'background-color:#800080; color:white;text-align:center;'),
-
 
         ];
     }
@@ -109,8 +102,7 @@ final class PermissionTable extends PowerGridComponent
         return [
             Filter::inputText('id', 'id')->placeholder('ID'),
             Filter::inputText('name', 'name')->placeholder('name'),
-            Filter::inputText('guard_name', 'guard_name')->placeholder('guard name'),
-
+            Filter::inputText('description', 'description')->placeholder('description'),
         ];
     }
 

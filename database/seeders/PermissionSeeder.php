@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 
 class PermissionSeeder extends Seeder
 {
@@ -16,50 +18,73 @@ class PermissionSeeder extends Seeder
     {
         // Permission::truncate();
 
-        $permissions = [
-            'role-lihat',
-            'role-buat',
-            'role-edit',
-            'role-hapus',
+        // $permissions = [
+        //     'role-show',
+        //     'role-create',
+        //     'role-edit',
+        //     'role-delete',
 
-            'permission-lihat',
-            'permission-buat',
-            'permission-edit',
-            'permission-hapus',
+        //     'permission-show',
+        //     'permission-create',
+        //     'permission-edit',
+        //     'permission-delete',
 
-            'user-lihat',
-            'user-buat',
-            'user-edit',
-            'user-hapus',
+        //     'user-show',
+        //     'user-create',
+        //     'user-edit',
+        //     'user-delete',
 
-            'hasil_asesmen-lihat',
-            'hasil_asesmen-buat',
-            'hasil_asesmen-edit',
-            'hasil_asesmen-hapus',
+        //     'asset_type-show',
+        //     'asset_type-create',
+        //     'asset_type-edit',
+        //     'asset_type-delete',
 
-            'penilaian_asesmen-lihat',
-            'penilaian_asesmen-buat',
-            'penilaian_asesmen-edit',
-            'penilaian_asesmen-hapus',
+        //     'asset_category-show',
+        //     'asset_category-create',
+        //     'asset_category-edit',
+        //     'asset_category-delete',
 
-            'asesmen_evaluator-lihat',
-            'asesmen_evaluator-buat',
-            'asesmen_evaluator-edit',
-            'asesmen_evaluator-hapus',
 
-            'pertanyaan-lihat',
-            'pertanyaan-buat',
-            'pertanyaan-edit',
-            'pertanyaan-hapus',
+        // ];
 
-            'daftar_asesmen-lihat',
-            'daftar_asesmen-buat',
-            'daftar_asesmen-edit',
-            'daftar_asesmen-hapus',
-        ];
+        // foreach ($permissions as $permission) {
+        //     Permission::create(['name' => $permission,'guard_name' => 'web']);
+        // }
 
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission,'guard_name' => 'web']);
-        }
+
+        $userRole = Role::create(['name' => 'user']);
+        $userRole->givePermissionTo('dashboard-show');
+
+        $salesRole = Role::create(['name' => 'marketing']);
+        $salesRole->givePermissionTo('asset_type-show');
+        $salesRole->givePermissionTo('asset_type-create');
+        $salesRole->givePermissionTo('asset_type-edit');
+        $salesRole->givePermissionTo('asset_type-edit');
+
+
+        $developerRole = Role::create(['name' => 'developer']);
+        $adminRole = Role::create(['name' => 'admin']);
+
+        $user = User::factory()->create([
+            'name' => 'user1',
+            'email' => 'user1@gmail.com',
+            'password' => Hash::make('abcdefgh')
+        ]);
+        $user->assignRole($visitorRole);
+
+        $sales = User::factory()->create([
+            'name' => 'sales',
+            'email' => 'sales@gmail.com',
+            'password' => Hash::make('abcdefgh')
+        ]);
+        $sales->assignRole($salesRole);
+
+        $devloper = User::factory()->create([
+            'name' => 'developer',
+            'email' => 'developer@gmail.com',
+            'password' => bcrypt('abcdefgh')
+        ]);
+        $devloper->assignRole($developerRole);
+
     }
 }

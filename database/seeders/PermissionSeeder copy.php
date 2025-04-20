@@ -26,8 +26,8 @@ class PermissionSeeder extends Seeder
                 Permission::create(['name' => 'hapus pertanyaan']);
 
                 //create roles and assign existing permissions
-                $customerRole = Role::create(['name' => 'customer']);
-                $customerRole->givePermissionTo('lihat pertanyaan');
+                $userRole = Role::create(['name' => 'user']);
+                $userRole->givePermissionTo('lihat pertanyaan');
 
                 $marketingRole = Role::create(['name' => 'marketing']);
                 $marketingRole->givePermissionTo('lihat pertanyaan');
@@ -43,7 +43,7 @@ class PermissionSeeder extends Seeder
                 // create demo users
                 $user = Pengguna::factory()->create([
                     'name' => 'Example user',
-                    'email' => 'customer@mail.com',
+                    'email' => 'user@mail.com',
                     'password' => Hash::make('123123123')
                 ]);
                 $user->assignRole($visitorRole);

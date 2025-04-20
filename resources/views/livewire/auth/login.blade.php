@@ -5,12 +5,12 @@
 
       <!-- Gambar untuk Mobile -->
       <div class="max-w-md text-center lg:hidden my-4">
-          <img src="{{ asset('umeda-logo.png') }}" class="w-48" alt="" srcset="">
+          <img src="{{ asset('aslanasilon-asset.png') }}" class="w-48" alt="" srcset="">
       </div>
 
       <!-- Gambar untuk Desktop -->
       <div class="hidden lg:flex items-center justify-center flex-1">
-          <img src="{{ asset('umeda-logo.png') }}" width="524.67004" height="531.39694" alt="" srcset="">
+          <img src="{{ asset('aslanasilon-asset.png') }}" width="524.67004" height="531.39694" alt="" srcset="">
       </div>
   </div>
 
@@ -25,7 +25,7 @@
         <x-password wire:model="password" class="block text-sm font-medium text-gray-700" label="password"  placeholder="password"
           password-icon="o-lock-closed" password-visible-icon="o-lock-open" right />
 
-        <x-button type="submit" spinner="login" class="bg-[#A16A38] hover:bg-red-900  block text-sm font-medium text-white p-2" >
+        <x-button type="submit" spinner="login" class="bg-[#800080] hover:bg-red-900  block text-sm font-medium text-white p-2" >
           Masuk
         </x-button>
         <x-errors class="text-white" />

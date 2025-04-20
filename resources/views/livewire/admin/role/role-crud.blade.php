@@ -23,84 +23,26 @@
     </div>
     </div>
 
+{{ auth()->user()->name }}
+    <form wire:submit.prevent="update">
 
-    <x-form wire:submit="{{ $id ? 'update' : 'store' }}" wire:confirm="Are you sure?">
+        @foreach ($groupedPermissions as $group => $permissionsInGroup)
+            <div class="mb-3">
+                <h4>{{ ucfirst($group) }}</h4>
+                @foreach ($permissionsInGroup as $permission)
+                    <div>
+                        <label>
+                            <input type="checkbox" wire:model="selectedPermissions" value="{{ $permission->id }}">
+                            {{ ucfirst($permission->name) }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
 
-    <div class="" style="height: 500px; overflow: auto;">
-<table class="min-w-full divide-y divide-gray-200">
-    <thead>
-        <tr>
-            <th class="px-4 py-2 text-left">
-                <x-checkbox
-                    id="checkAll"
-                    label="Check All"
-                    wire:model="checkAll"
-                    wire:click="toggleCheckAll"
-                />
-            </th>
-            <th class="px-4 py-2 text-left">Permission</th>
-        </tr>
-    </thead>
-    <tbody class="bg-white divide-y divide-gray-200">
-        @if($checkAction)
+        <button type="submit" class="btn btn-primary mt-3">Update Permissions</button>
 
-            @foreach ($permissions as $permission)
-                <tr class="flex items-center">
-                    <td class="flex items-center px-4 py-2 text-left">
-                        <x-checkbox
-                            class="pr-4"
-                            wire:model="selectedPermissions"
-                            value="{{ $permission->id }}"
-                            id="permission-{{ $permission->id }}"
-                            :checked="in_array($permission->id)"
-                        />
-                        <div class=" ">
-                            {{ $permission->name }}
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-
-        @else
-            @forelse ($groupedPermissions as $group => $permissions)
-                    <tr>
-                        <td colspan="2" class="font-bold">{{ ucfirst($group) }}</td>
-                    </tr>
-                    @foreach ($permissions as $permission)
-                        <tr class="flex items-center">
-                            <td class="flex items-center px-4 py-2 text-left">
-                                <x-checkbox
-                                    class="pr-4"
-                                    wire:model="selectedPermissions"
-                                    value="{{ $permission->id }}"
-                                    id="permission-{{ $permission->id }}"
-                                    :checked="in_array($permission->id, $rolePermissions->pluck('permission_id')->toArray())"
-                                />
-                                <div class=" ">
-                                    {{ $permission->name }}
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-
-            @empty
-                <tr>
-                    <td colspan="2" class="text-center">No permissions available.</td>
-                </tr>
-            @endforelse
-        @endif
-    </tbody>
-</table>
-</div>
-
-
-    @if (!$isReadonly)
-        <div class="text-center mt-3">
-        <x-errors class="text-white mb-3" />
-        <x-button type="submit" :label="$id ? 'Update' : 'Store'" class="btn-success btn-sm text-white" />
-        </div>
-    @endif
-    </x-form>
+    </form>
 
 
 <!-- Loading Indicator -->

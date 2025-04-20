@@ -12,15 +12,7 @@
 
     <x-card :title="$title"  :url="$url" >
 
-        <div class="flex items-center space-x-4">
 
-            <x-stat
-                title="Asesmen Yang Sudah Diikuti"
-                value="{{ count($this->jumlahAsesmenYangPernahDiikuti) }}"
-                icon="o-envelope"
-                tooltip="Hello"
-                color="text-primary" />
-        </div>
 
         <x-menu-separator />
 

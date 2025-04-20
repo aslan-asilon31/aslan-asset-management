@@ -22,10 +22,10 @@ class PermissionTableSeeder extends Seeder
            'permission-buat',
            'permission-edit',
            'permission-hapus',
-           'asesmen-list',
-           'asesmen-buat',
-           'asesmen-edit',
-           'asesmen-hapus'
+           'asset-list',
+           'asset-buat',
+           'asset-edit',
+           'asset-hapus'
         ];
 
         foreach ($permissions as $permission) {
