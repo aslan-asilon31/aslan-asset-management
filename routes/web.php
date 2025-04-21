@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/permission', App\Livewire\Admin\Permission\PermissionList::class)->name('permission');
     Route::get('/permission/create', App\Livewire\Admin\Permission\PermissionCrud::class)->name('permission-crud');
-    Route::get('/permission/edit/{id}', App\Livewire\Admin\Permission\PermissionCrud::class)->name('permission-crud');
+    Route::get('/permission/edit/{id}', App\Livewire\Admin\Permission\PermissionCrud::class)->name('permission-edit');
 
     Route::get('/profil', App\Livewire\Admin\Profil\Profil::class)->name('profil');
 

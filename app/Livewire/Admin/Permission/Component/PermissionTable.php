@@ -66,8 +66,8 @@ final class PermissionTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('action', fn($record) => Blade::render('
                 <x-dropdown no-x-anchor class="btn-sm">
-                    <x-menu-item title="Show" Link="/daftar-pertanyaan/show/' . e($record->id) . '/readonly" />
-                    <x-menu-item class="" title="Edit" Link="/daftar-pertanyaan/edit/' . e($record->id) . '"/>
+                    <x-menu-item title="Show" Link="/permission/show/' . e($record->id) . '/readonly" />
+                    <x-menu-item class="" title="Edit" Link="/permission/edit/' . e($record->id) . '"/>
                 </x-dropdown>'))
             ->add('name', fn($record) => $record->name)
             ->add('guard_name');

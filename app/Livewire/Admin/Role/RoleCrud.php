@@ -68,6 +68,7 @@ class RoleCrud extends Component
     public  $groupedPermissions = [];
     public bool $checkAll = false;
     public $checkAction = false;
+    public $permissionList = false;
 
 
 
@@ -88,6 +89,12 @@ class RoleCrud extends Component
       $this->create();
     }
     $this->initialize();
+  }
+
+
+  public function permissionList()
+  {
+    $this->permissionList = true;
   }
 
 

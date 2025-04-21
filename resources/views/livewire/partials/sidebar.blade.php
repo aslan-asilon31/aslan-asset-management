@@ -41,9 +41,6 @@
 
             <x-menu-item title="Role" icon="o-squares-2x2" link="/role" :class="request()->is('role') ? 'active' : ''" />
 
-            <x-menu-item title="Permission" icon="o-squares-2x2" link="/permission" :class="request()->is('permission') ? 'active' : ''" />
-
-
         </x-menu>
     </x-slot:sidebar>
 </div>

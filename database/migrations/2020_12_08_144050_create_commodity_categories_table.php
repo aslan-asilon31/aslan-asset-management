@@ -15,8 +15,8 @@ class CreateCommodityCategoriesTable extends Migration
     {
         Schema::create('commodity_categories', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('asset_type');
-            $table->string('name');
+            $table->string('asset_type')->nullable();
+            $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
         });

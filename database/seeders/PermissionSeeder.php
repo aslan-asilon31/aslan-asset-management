@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class PermissionSeeder extends Seeder
@@ -52,10 +54,10 @@ class PermissionSeeder extends Seeder
         // }
 
 
-        $userRole = Role::create(['name' => 'user']);
-        $userRole->givePermissionTo('dashboard-show');
+        // $userRole = Role::create(['name' => 'user']);
+        // $userRole->givePermissionTo('dashboard-show');
 
-        $salesRole = Role::create(['name' => 'marketing']);
+        $salesRole = Role::create(['name' => 'sales']);
         $salesRole->givePermissionTo('asset_type-show');
         $salesRole->givePermissionTo('asset_type-create');
         $salesRole->givePermissionTo('asset_type-edit');
@@ -63,14 +65,13 @@ class PermissionSeeder extends Seeder
 
 
         $developerRole = Role::create(['name' => 'developer']);
-        $adminRole = Role::create(['name' => 'admin']);
 
         $user = User::factory()->create([
             'name' => 'user1',
             'email' => 'user1@gmail.com',
             'password' => Hash::make('abcdefgh')
         ]);
-        $user->assignRole($visitorRole);
+        $user->assignRole($userRole);
 
         $sales = User::factory()->create([
             'name' => 'sales',

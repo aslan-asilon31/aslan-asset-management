@@ -15,12 +15,12 @@ class CreateCommodityUpdatesTable extends Migration
     {
         Schema::create('commodity_updates', function (Blueprint $table) {
             $table->uuid('id');
-            $table->foreignId('commodity_id')->constrained();
-            $table->foreignId('commodity_category_id')->constrained();
-            $table->foreignId('commodity_location_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->bigInteger('amount');
-            $table->date('update_date');
+            $table->foreignId('commodity_id')->constrained()->nullable();
+            $table->foreignId('commodity_category_id')->constrained()->nullable();
+            $table->foreignId('commodity_location_id')->constrained()->nullable();
+            $table->foreignId('user_id')->constrained()->nullable();
+            $table->bigInteger('amount')->nullable();
+            $table->date('update_date')->nullable();
             $table->timestamps();
         });
     }
