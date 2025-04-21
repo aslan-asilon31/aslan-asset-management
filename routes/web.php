@@ -46,7 +46,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/asset-category', App\Livewire\Admin\AssetCategory\AssetCategoryList::class)->name('asset-category');
     Route::get('/asset', App\Livewire\Admin\Asset\AssetList::class)->name('asset');
     
-     Route::get('/role2', App\Livewire\Admin\Role\RoleList::class)->name('role');
+    Route::get('/role2', App\Livewire\Admin\Role\RoleList::class)->name('role');
+
+    Route::get('/role3', App\Livewire\Admin\Role\RoleList::class)->name('role');
 
 
 });
